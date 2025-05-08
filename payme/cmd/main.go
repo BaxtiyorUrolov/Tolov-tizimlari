@@ -25,7 +25,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Payme handler with user-provided key and base URL
+	// payme handler with user-provided key and base URL
 	handler := payme.NewHandler(db, os.Getenv("PAYME_KEY"), os.Getenv("PAYME_BASE_URL"))
 
 	// Set up webhook endpoint
@@ -42,7 +42,7 @@ func main() {
 		log.Fatalf("Error: %v", err)
 	}
 
-	fmt.Println("Payme transaction link:", link)
+	fmt.Println("payme transaction link:", link)
 
 	// Start server
 	log.Println("Server started at :8080")

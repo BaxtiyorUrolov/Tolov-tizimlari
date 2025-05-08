@@ -11,7 +11,7 @@ type StorageI interface {
 	Payme() PaymeI
 }
 
-// PaymeI defines the interface for Payme-specific storage operations.
+// PaymeI defines the interface for payme-specific storage operations.
 type PaymeI interface {
 	CheckPayme(ctx context.Context, orderID string, amount int) (bool, error)
 	GetPayme(ctx context.Context, orderID string) (*models.Payme, error)

@@ -21,7 +21,7 @@ func (s *paymeStorage) CheckPayme(ctx context.Context, orderID string, amount in
 	return exists, nil
 }
 
-// GetPayme retrieves a Payme transaction by its order ID.
+// GetPayme retrieves a payme transaction by its order ID.
 func (s *paymeStorage) GetPayme(ctx context.Context, orderID string) (*models.Payme, error) {
 	var payme models.Payme
 	query := `SELECT * FROM payme WHERE id = $1`
@@ -32,7 +32,7 @@ func (s *paymeStorage) GetPayme(ctx context.Context, orderID string) (*models.Pa
 	return &payme, nil
 }
 
-// UpdatePayme updates the state and timestamps of a Payme transaction.
+// UpdatePayme updates the state and timestamps of a payme transaction.
 func (s *paymeStorage) UpdatePayme(ctx context.Context, payme *models.Payme) error {
 	query := `
 		UPDATE payme

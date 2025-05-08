@@ -16,14 +16,14 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-// Handler handles Payme webhook requests and transactions.
+// Handler handles payme webhook requests and transactions.
 type Handler struct {
 	store        storage.StorageI
-	paymeKey     string // Payme API key, provided by the user
-	paymeBaseURL string // Base URL for Payme API (e.g., test or production)
+	paymeKey     string // payme API key, provided by the user
+	paymeBaseURL string // Base URL for payme API (e.g., test or production)
 }
 
-// NewHandler creates a new Handler instance with the provided database, Payme key, and base URL.
+// NewHandler creates a new Handler instance with the provided database, payme key, and base URL.
 func NewHandler(db *sqlx.DB, paymeKey, paymeBaseURL string) *Handler {
 	if paymeBaseURL == "" {
 		paymeBaseURL = "https://test.paycom.uz" // Default to test environment if not specified
@@ -35,7 +35,7 @@ func NewHandler(db *sqlx.DB, paymeKey, paymeBaseURL string) *Handler {
 	}
 }
 
-// CreatePaymeTransaction generates a Payme transaction URL for the given user and amount.
+// CreatePaymeTransaction generates a payme transaction URL for the given user and amount.
 func (h *Handler) CreatePaymeTransaction(userID, amount int, paymeMerchantID, returnURL string) (string, error) {
 	payme := &models.Payme{
 		ID:         fmt.Sprintf("%d-%d", userID, time.Now().Unix()),
@@ -50,7 +50,7 @@ func (h *Handler) CreatePaymeTransaction(userID, amount int, paymeMerchantID, re
 	return fmt.Sprintf("%s/%s", h.paymeBaseURL, encoded), nil
 }
 
-// HandlePaymeWebhook processes incoming Payme webhook requests.
+// HandlePaymeWebhook processes incoming payme webhook requests.
 func (h *Handler) HandlePaymeWebhook(w http.ResponseWriter, r *http.Request) {
 	var reqBody map[string]interface{}
 	if err := json.NewDecoder(r.Body).Decode(&reqBody); err != nil {
@@ -164,7 +164,7 @@ func (h *Handler) handleCreateTransaction(w http.ResponseWriter, req map[string]
 
 	paymeID, ok := params["id"].(string)
 	if !ok {
-		fmt.Println("Payme ID not found")
+		fmt.Println("payme ID not found")
 		writeErrorResponse(w, -32504, getErrorMessageMap(-32504))
 		return
 	}
@@ -175,7 +175,7 @@ func (h *Handler) handleCreateTransaction(w http.ResponseWriter, req map[string]
 		return
 	}
 	if err != nil && !errors.Is(err, sql.ErrNoRows) {
-		fmt.Println("Error fetching Payme transaction:", err)
+		fmt.Println("Error fetching payme transaction:", err)
 		writeErrorResponse(w, -31008, getErrorMessageMap(-31008))
 		return
 	}
@@ -223,7 +223,7 @@ func (h *Handler) handlePerformTransaction(w http.ResponseWriter, req map[string
 
 	paymeID, ok := params["id"].(string)
 	if !ok {
-		fmt.Println("Payme ID not found")
+		fmt.Println("payme ID not found")
 		writeErrorResponse(w, -31050, getErrorMessageMap(-31050))
 		return
 	}
@@ -280,7 +280,7 @@ func (h *Handler) handleCancelTransaction(w http.ResponseWriter, req map[string]
 
 	paymeID, ok := params["id"].(string)
 	if !ok {
-		fmt.Println("Payme ID not found")
+		fmt.Println("payme ID not found")
 		writeErrorResponse(w, -31050, getErrorMessageMap(-31050))
 		return
 	}
@@ -342,7 +342,7 @@ func (h *Handler) handleCheckTransaction(w http.ResponseWriter, req map[string]i
 
 	paymeID, ok := params["id"].(string)
 	if !ok {
-		fmt.Println("Payme ID not found")
+		fmt.Println("payme ID not found")
 		writeErrorResponse(w, -31050, getErrorMessageMap(-31050))
 		return
 	}

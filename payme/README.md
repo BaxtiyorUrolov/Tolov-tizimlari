@@ -41,7 +41,7 @@ import (
 	"os"
 	"github.com/jmoiron/sqlx"
 	"github.com/joho/godotenv"
-	"github.com/BaxtiyorUrolov/Tolov-tizimlari/payme"
+	"github.com/BaxtiyorUrolov/Tolov-tizimlari/Payme"
 	_ "github.com/lib/pq"
 )
 
@@ -57,7 +57,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Create Payme handler
+	// Create payme handler
 	handler := payme.NewHandler(db, os.Getenv("PAYME_KEY"), os.Getenv("PAYME_BASE_URL"))
 
 	// Create a transaction
@@ -70,7 +70,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}
-	fmt.Println("Payme transaction link:", link)
+	fmt.Println("payme transaction link:", link)
 }
 ```
 
