@@ -7,7 +7,7 @@ Bu loyiha O‘zbekistondagi to‘lov tizimlari bilan ishlash uchun Go package’
 Loyihani o‘rnatish uchun quyidagi buyruqni ishlatishingiz mumkin:
 
 ```bash
-go get github.com/BaxtiyorUrolov/Tolov-tizimlari/payme
+go get github.com/myusername/Tolov-tizimlari/payme
 ```
 
 ## Talablar
@@ -18,7 +18,7 @@ go get github.com/BaxtiyorUrolov/Tolov-tizimlari/payme
 
 ## Konfiguratsiya
 
-Loyihadan foydalanish uchun `.env` faylida quyidagi o‘zgaruvchilarni sozlang. Namuna sifatida `.env.example` faylidan foydalanishingiz mumkin:
+Loyihadan foydalanish uchun `.env` faylida quyidagi o‘zgaruvchilarni sozlang.
 
 ```plaintext
 DATABASE_URL=host=localhost user=postgres dbname=yourdb sslmode=disable
@@ -41,7 +41,7 @@ import (
 	"os"
 	"github.com/jmoiron/sqlx"
 	"github.com/joho/godotenv"
-	"github.com/BaxtiyorUrolov/Tolov-tizimlari/Payme"
+	"github.com/myusername/Tolov-tizimlari/payme"
 	_ "github.com/lib/pq"
 )
 
@@ -82,14 +82,14 @@ Payme tranzaksiyalarni saqlash uchun quyidagi SQL sxemasidan foydalaning:
 
 ```sql
 CREATE TABLE payme (
-    id TEXT PRIMARY KEY,
-    payme_transaction_id TEXT,
-    user_id INTEGER,
-    amount INTEGER,
-    state INTEGER,
-    create_time TIMESTAMP,
-    perform_time TIMESTAMP,
-    cancel_time TIMESTAMP
+                       id TEXT PRIMARY KEY,
+                       payme_transaction_id TEXT,
+                       user_id INTEGER,
+                       amount INTEGER,
+                       state INTEGER,
+                       create_time TIMESTAMP,
+                       perform_time TIMESTAMP,
+                       cancel_time TIMESTAMP
 );
 ```
 
